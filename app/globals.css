@@ -6,27 +6,15 @@
 @import 'aos/dist/aos.css';
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, #F8FAFC, #F1F5F9);
-  scroll-behavior: smooth;
-}
-
-.dark body {
   background: linear-gradient(to bottom, #0f172a, #1e293b);
+  scroll-behavior: smooth;
 }
 
 /* Apply Space Grotesk to all headings */
@@ -66,16 +54,11 @@ h1, h2, h3, h4, h5, h6 {
     background: #a855f7;
   }
 
-  /* Hero background with dot grid pattern */
+  /* Hero background with dot grid pattern - Always dark mode */
   .hero-background {
-    background-color: #ffffff;
-    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-
-  .dark .hero-background {
     background-color: #0f172a;
     background-image: radial-gradient(#334155 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 
   /* Dashboard card styles */

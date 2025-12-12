@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import DarkModeToggle from './DarkModeToggle';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -67,12 +66,10 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <DarkModeToggle />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <DarkModeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-accent-blue-200 hover:bg-header-navy-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent-blue"
