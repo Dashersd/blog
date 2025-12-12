@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, #F8FAFC, #F1F5F9);
+  scroll-behavior: smooth;
+}
+
+.dark body {
+  background: linear-gradient(to bottom, #0f172a, #1e293b);
+}
+
+/* Apply Space Grotesk to all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text utility */
+  .gradient-text {
+    background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Radial gradient mesh utility */
+  .gradient-mesh {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  
+  .gradient-mesh-blue {
+    background: #3b82f6;
+  }
+  
+  .gradient-mesh-purple {
+    background: #a855f7;
+  }
+
+  /* Hero background with dot grid pattern */
+  .hero-background {
+    background-color: #ffffff;
+    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .dark .hero-background {
+    background-color: #0f172a;
+    background-image: radial-gradient(#334155 1px, transparent 1px);
+  }
+
+  /* Dashboard card styles */
+  .dashboard-card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #3b82f6;
+  }
+
+  /* Marquee animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Avatar glow animation - pulsating blue */
+  @keyframes avatar-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px 0 rgba(59, 130, 246, 0.6), 0 0 40px 0 rgba(59, 130, 246, 0.4), 0 0 60px 0 rgba(6, 182, 212, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px 0 rgba(59, 130, 246, 0.8), 0 0 60px 0 rgba(59, 130, 246, 0.6), 0 0 90px 0 rgba(6, 182, 212, 0.5);
+    }
+  }
+
+  .avatar-glow {
+    animation: avatar-glow 2s ease-in-out infinite;
+    background: transparent;
+  }
+
+  /* Universal interactive card hover effect */
+  .interactive-card {
+    transition: all 0.3s ease;
+  }
+
+  .interactive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Scroll fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Universal Card Hover Animation - The Subtle Lift (3px) */
+  .blog-card-link article,
+  .project-card,
+  .research-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease;
+  }
+
+  .blog-card-link:hover article,
+  .project-card:hover,
+  .research-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Research Card Micro-Interactions */
+  .research-card {
+    /* The "Lift" effect - card moves up with enhanced shadow */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease;
+  }
+
+  .research-card:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Image Zoom effect - icon scales up on hover */
+  .research-icon {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .research-card:hover .research-icon {
+    transform: scale(1.15);
+  }
+
+  /* Call-to-Action Reveal - slides in from bottom */
+  .research-cta {
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced typography for expressive headings */
+  .font-heading {
+    font-family: var(--font-space-grotesk), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Dark mode support for research cards */
+  .dark .research-card {
+    background-color: #1e293b;
+    border-color: #334155;
+  }
+
+  .dark .research-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Blog post content styling */
+.prose {
+  color: rgb(55, 65, 81);
+  max-width: 65ch;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: rgb(17, 24, 39);
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.prose h1 {
+  font-size: 2.25em;
+}
+
+.prose h2 {
+  font-size: 1.875em;
+}
+
+.prose h3 {
+  font-size: 1.5em;
+}
+
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  line-height: 1.75;
+}
+
+.prose a {
+  color: rgb(8, 132, 199);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: rgb(7, 89, 133);
+}
+
+.prose strong {
+  color: rgb(17, 24, 39);
+  font-weight: 600;
+}
+
+.prose code {
+  color: rgb(8, 132, 199);
+  background-color: rgb(243, 244, 246);
+  padding: 0.125em 0.375em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose blockquote {
+  border-left: 4px solid rgb(8, 132, 199);
+  padding-left: 1em;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: rgb(107, 114, 128);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin: 2em auto;
+  display: block;
+}
+
+.prose img:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Fix for Next.js portal element - ensure it doesn't interfere with layout */
+nextjs-portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
