@@ -26,7 +26,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Get In Touch</h2>
               <p className="text-gray-600 mb-6">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
               </p>
             </div>
 
@@ -48,7 +48,7 @@ export default function ContactPage() {
             <div className="bg-primary-50 rounded-lg p-6 border border-primary-100">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Contact Methods</h3>
               <p className="text-gray-700">
-                Please reach out through your preferred method. I'll get back to you as soon as possible.
+                Please reach out through your preferred method. I&apos;ll get back to you as soon as possible.
               </p>
               <p className="text-gray-600 text-sm mt-4">
                 <em>Contact information can be added here (email, social media links, etc.)</em>

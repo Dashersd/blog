@@ -42,7 +42,8 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     });
 
     return () => {
-      cardRefs.current.forEach((ref) => {
+      const currentRefs = cardRefs.current;
+      currentRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };

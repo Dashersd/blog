@@ -44,7 +44,8 @@ export default function ResearchGrid({ items }: ResearchGridProps) {
     });
 
     return () => {
-      cardRefs.current.forEach((ref) => {
+      const currentRefs = cardRefs.current;
+      currentRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };

@@ -82,7 +82,7 @@ export default function Home() {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-4 relative z-10">
-            I'm a <TypewriterText 
+            I&apos;m a <TypewriterText 
               words={['Back-end Developer', 'BSIT Student']} 
               className="text-blue-600 dark:text-blue-400 font-semibold"
             />

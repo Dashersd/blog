@@ -41,7 +41,7 @@ export default function ProjectsPage() {
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Here are the featured system projects I've worked on:
+            Here are the featured system projects I&apos;ve worked on:
           </p>
         </div>
 
