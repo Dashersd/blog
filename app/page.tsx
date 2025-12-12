@@ -138,7 +138,7 @@ export default function Home() {
             name="Harra Lou"
             role="Front-end Developer"
             description="Designs and implements user interfaces and system layouts"
-            avatar="/profile.png"
+            avatar="/Harra.png"
           />
 
           {/* Team Member Card 3 - Helman */}
