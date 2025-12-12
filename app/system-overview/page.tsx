@@ -30,7 +30,7 @@ export default function SystemOverviewPage() {
               name="Hadjara A. Salem"
               role="Project Manager"
               description="Manages workflow, documentation, and client communication. Ensures project milestones are met on time."
-              avatar="/profile.png"
+              avatar="/Hadjara.png"
             />
             <TeamMemberCard
               name="Harra Lou"
