@@ -55,6 +55,11 @@ function normalizeImages(rawImages: unknown, fallbackContent: string): BlogImage
   return normalized;
 }
 
+function stripImagesFromHtml(contentHtml: string): string {
+  // Remove standalone image paragraphs to avoid duplicate rendering alongside the carousel
+  return contentHtml.replace(/<p>\s*<img[^>]*>\s*<\/p>/g, '');
+}
+
 export function getSortedPostsData(): BlogPost[] {
   // Get file names under /content/blog
   const fileNames = fs.existsSync(postsDirectory)
@@ -121,7 +126,7 @@ export async function getPostData(slug: string): Promise<BlogPost> {
     .use(html, { sanitize: false })
     .use(remarkImages)
     .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  const contentHtml = stripImagesFromHtml(processedContent.toString());
 
   // Combine the data with the slug and contentHtml
   return {
