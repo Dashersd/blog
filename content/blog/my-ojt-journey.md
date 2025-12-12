@@ -1,11 +1,10 @@
 ---
-title: "My 1st day as a OJT at NCIP "
+title: "My 1st OJT Journey"
 date: "2025-12-09"
-excerpt: "1st Day of OJT Journey"
+excerpt: "1st Day of OJT in NCIP"
 ---
 
-
-![8dacf68a-01bb-4a3d-bfde-2ce656ee60bb.jfif](/blog-images/1765535843466-8dacf68a-01bb-4a3d-bfde-2ce656ee60bb.jfif)
+![2.jpeg](/blog-images/1765538057564-2.jpeg)
 ### My OJT Journey at NCIP
 Starting my On-the-Job Training (OJT) at the National Commission on Indigenous Peoples (NCIP) has been an incredible learning experience. This opportunity has allowed me to apply my academic knowledge in a real-world professional environment.
 
@@ -23,8 +22,8 @@ After the Groupings Harra, Hadjara and I consult Atty. Idiang system. She told u
 
 ### Brainstroming & Wireframes
 After the consultation of Atty. Idiang our team started the brainstorming
-![984fd8f1-bc80-468d-869e-2d3357542ffb.jfif](/blog-images/1765535839774-984fd8f1-bc80-468d-869e-2d3357542ffb.jfif)
+
 Thinking every possibilities that we may provide for the system that we're going to develop
 
-Looking Forward
-As I continue my OJT journey, I'm excited to learn more and contribute further to the organization. This experience is shaping me into a more well-rounded IT professional.
+###Looking Forward
+As I continue my OJT journey, I'm excited to learn more and contribute further to the organization. This experience is shaping me into a more well-rounded IT professional.![1.jpeg](/blog-images/1765538045499-1.jpeg)

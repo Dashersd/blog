@@ -15,6 +15,9 @@ export default function BlogEditor() {
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [existingSlugs, setExistingSlugs] = useState<string[]>([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   useEffect(() => {
     // Get existing slugs from API
@@ -54,14 +57,46 @@ export default function BlogEditor() {
     }
   };
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    setLoading(true);
+    // Validate file type
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    if (!validTypes.includes(file.type)) {
+      setMessage({ type: 'error', text: 'Invalid file type. Only JPEG, PNG, GIF, and WebP are allowed.' });
+      event.target.value = '';
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      setMessage({ type: 'error', text: 'File size exceeds 5MB limit' });
+      event.target.value = '';
+      return;
+    }
+
+    // Store file and create preview
+    setSelectedFile(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewUrl(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+    
+    // Reset file input so the same file can be selected again
+    event.target.value = '';
+  };
+
+  const handleConfirmUpload = async () => {
+    if (!selectedFile) return;
+
+    setUploadingImage(true);
+    setMessage(null);
     try {
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append('image', selectedFile);
 
       const response = await fetch('/api/blog/upload-image', {
         method: 'POST',
@@ -76,20 +111,33 @@ export default function BlogEditor() {
         const cursorPos = textarea.selectionStart;
         const textBefore = content.substring(0, cursorPos);
         const textAfter = content.substring(cursorPos);
-        const imageMarkdown = `![${file.name}](${data.url})\n`;
+        const imageMarkdown = `![${selectedFile.name}](${data.url})\n`;
         setContent(textBefore + imageMarkdown + textAfter);
         setMessage({ type: 'success', text: 'Image uploaded successfully!' });
         
-        // Reset file input
-        event.target.value = '';
+        // Clear preview
+        setSelectedFile(null);
+        setPreviewUrl(null);
       } else {
         setMessage({ type: 'error', text: data.error || 'Failed to upload image' });
       }
     } catch (error) {
       setMessage({ type: 'error', text: 'Error uploading image' });
     } finally {
-      setLoading(false);
+      setUploadingImage(false);
     }
+  };
+
+  const handleCancelPreview = () => {
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    setMessage(null);
+  };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
   };
 
   const handleSave = async () => {
@@ -272,28 +320,96 @@ export default function BlogEditor() {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Upload Image
               </label>
-              <div className="flex items-center gap-4">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  disabled={loading}
-                  className="block w-full text-sm text-gray-500 dark:text-gray-400
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-md file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-accent-500 file:text-white
-                    hover:file:bg-accent-600
-                    file:cursor-pointer
-                    disabled:opacity-50"
-                />
-                <span className="text-xs text-gray-500 dark:text-gray-400">
-                  Max 5MB (JPEG, PNG, GIF, WebP)
-                </span>
-              </div>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Images will be inserted at your cursor position in the editor below
-              </p>
+              
+              {!previewUrl ? (
+                <>
+                  <div className="flex items-center gap-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileSelect}
+                      disabled={loading || uploadingImage}
+                      className="block w-full text-sm text-gray-500 dark:text-gray-400
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-md file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-accent-500 file:text-white
+                        hover:file:bg-accent-600
+                        file:cursor-pointer
+                        disabled:opacity-50"
+                    />
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      Max 5MB (JPEG, PNG, GIF, WebP)
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Images will be inserted at your cursor position in the editor below
+                  </p>
+                </>
+              ) : (
+                <div className="mt-2 p-4 border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-lg bg-gray-50 dark:bg-slate-700/50">
+                  {/* Preview Box */}
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    {/* Image Thumbnail */}
+                    <div className="flex-shrink-0">
+                      <img
+                        src={previewUrl}
+                        alt="Preview"
+                        className="w-full sm:w-48 h-48 object-cover rounded-md border border-gray-300 dark:border-slate-600"
+                      />
+                    </div>
+                    
+                    {/* File Info and Actions */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                          {selectedFile?.name}
+                        </h4>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                          {selectedFile && formatFileSize(selectedFile.size)}
+                        </p>
+                      </div>
+                      
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        <button
+                          onClick={handleConfirmUpload}
+                          disabled={uploadingImage || loading}
+                          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium flex items-center gap-2"
+                        >
+                          {uploadingImage ? (
+                            <>
+                              <span className="animate-spin">⏳</span>
+                              Uploading...
+                            </>
+                          ) : (
+                            <>
+                              ✓ Confirm Upload
+                            </>
+                          )}
+                        </button>
+                        <button
+                          onClick={handleCancelPreview}
+                          disabled={uploadingImage || loading}
+                          className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+                        >
+                          ✕ Remove
+                        </button>
+                        <label className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 cursor-pointer transition-colors text-sm font-medium inline-block">
+                          Change File
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileSelect}
+                            disabled={uploadingImage || loading}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Content Editor */}

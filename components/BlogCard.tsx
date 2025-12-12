@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { useCallback, useState, type MouseEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface BlogCardProps {
   title: string;
@@ -25,12 +27,59 @@ const DocumentIcon = () => (
   </svg>
 );
 
+const TrashIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className="w-4 h-4"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <path d="M6.5 7.5h11" />
+    <path d="M10 10.5v6" />
+    <path d="M14 10.5v6" />
+    <path d="M9 7.5V6.25A1.25 1.25 0 0110.25 5h3.5A1.25 1.25 0 0115 6.25V7.5" />
+    <path d="M7.5 7.5l.6 9.02A1.5 1.5 0 009.59 18h4.82a1.5 1.5 0 001.49-1.48l.6-9.02" />
+  </svg>
+);
+
 export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: BlogCardProps) {
+  const router = useRouter();
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  const handleDelete = useCallback(
+    async (event: MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (isDeleting) return;
+
+      const confirmed = window.confirm(`Delete "${title}"? This cannot be undone.`);
+      if (!confirmed) return;
+
+      setIsDeleting(true);
+      try {
+        const res = await fetch(`/api/blog/${slug}`, { method: 'DELETE' });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Failed to delete post');
+        }
+        router.refresh();
+      } catch (error) {
+        console.error(error);
+        alert('Failed to delete post. Please try again.');
+      } finally {
+        setIsDeleting(false);
+      }
+    },
+    [isDeleting, router, slug, title]
+  );
 
   return (
     <Link
@@ -60,9 +109,22 @@ export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: B
         
         <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed clamp-3">{excerpt}</p>
         
-        {/* Accent colored Read more link */}
-        <div className="text-accent-blue dark:text-accent-blue-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-200 font-semibold text-sm inline-flex items-center gap-1 transition-all duration-300">
-          Read more <span className="transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">→</span>
+        <div className="flex items-center justify-between">
+          {/* Accent colored Read more link */}
+          <div className="text-accent-blue dark:text-accent-blue-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-200 font-semibold text-sm inline-flex items-center gap-1 transition-all duration-300">
+            Read more <span className="transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">→</span>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={isDeleting}
+            className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 transition disabled:opacity-60 disabled:cursor-not-allowed"
+            aria-label="Delete post"
+          >
+            <TrashIcon />
+            {isDeleting ? 'Deleting…' : 'Delete'}
+          </button>
         </div>
       </article>
     </Link>
