@@ -67,8 +67,8 @@ export default function Home() {
                 fill
                 className="object-cover rounded-full"
                 style={{ 
-                  objectPosition: 'center 30%',
-                  transform: 'scale(1.3)'
+                  objectPosition: 'center 40%',
+                  transform: 'none'
                 }}
                 priority
               />
