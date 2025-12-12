@@ -130,7 +130,7 @@ export default function Home() {
             name="Hadjara A. Salem"
             role="Project Manager"
             description="Manages workflow, documentation, and client communication"
-            avatar="/profile.png"
+            avatar="/Hadjara.png"
           />
 
           {/* Team Member Card 2 - Harra Lou */}
