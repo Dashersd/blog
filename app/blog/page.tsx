@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog';
-import BlogCard from '@/components/BlogCard';
+import BlogList from '@/components/BlogList';
 
 // Ensure the list reflects deletes immediately
 export const dynamic = 'force-dynamic';
@@ -28,31 +28,8 @@ export default function BlogPage() {
           </p>
         </div>
 
-        {/* Blog Posts */}
-        {posts.length > 0 ? (
-          <div className="space-y-8">
-            {posts.map((post, index) => (
-              <BlogCard
-                key={post.slug}
-                title={post.title}
-                excerpt={post.excerpt || post.content.substring(0, 150) + '...'}
-                date={post.date}
-                slug={post.slug}
-                aosDelay={index * 150}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg p-12 border border-gray-200 text-center">
-            <div className="text-6xl mb-6">📝</div>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              No blog posts yet
-            </h2>
-            <p className="text-gray-600">
-              Blog posts will appear here once they are added to the content/blog directory.
-            </p>
-          </div>
-        )}
+        {/* Blog Posts with Sorting */}
+        <BlogList posts={posts} />
       </div>
     </div>
   );

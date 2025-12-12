@@ -8,6 +8,7 @@ export default function BlogEditor() {
   const [slug, setSlug] = useState('');
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [dateEnd, setDateEnd] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ export default function BlogEditor() {
         setSlug(data.slug);
         setTitle(data.title);
         setDate(data.date || new Date().toISOString().split('T')[0]);
+        setDateEnd(data.dateEnd || '');
         setExcerpt(data.excerpt || '');
         setContent(data.content);
         setIsEditing(true);
@@ -159,6 +161,7 @@ export default function BlogEditor() {
           slug,
           title,
           date,
+          dateEnd: dateEnd || undefined,
           excerpt,
           content,
         }),
@@ -291,14 +294,35 @@ export default function BlogEditor() {
             {/* Date */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Date
+                Start Date (YYYY-MM-DD)
               </label>
               <input
-                type="date"
+                type="text"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-accent-500 focus:border-transparent"
+                placeholder="2025-11-24"
               />
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Format: YYYY-MM-DD (e.g., 2025-11-24) - You can type this manually
+              </p>
+            </div>
+
+            {/* Date End (Optional) */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                End Date (Optional - YYYY-MM-DD)
+              </label>
+              <input
+                type="text"
+                value={dateEnd}
+                onChange={(e) => setDateEnd(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-accent-500 focus:border-transparent"
+                placeholder="2025-11-28"
+              />
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Leave empty for single date. Format: YYYY-MM-DD (e.g., 2025-11-28) - For date ranges like "November 24-28, 2025"
+              </p>
             </div>
 
             {/* Excerpt */}
@@ -461,6 +485,7 @@ Write your content here using Markdown syntax.
                   setSlug('');
                   setTitle('');
                   setDate(new Date().toISOString().split('T')[0]);
+                  setDateEnd('');
                   setExcerpt('');
                   setContent('');
                   setIsEditing(false);

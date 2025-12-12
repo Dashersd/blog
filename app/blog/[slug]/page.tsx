@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getAllPostSlugs, getPostData } from '@/lib/blog';
+import { formatDateRange } from '@/lib/dateUtils';
 import Image from 'next/image';
 import PostCarousel from '@/components/PostCarousel';
 import { notFound } from 'next/navigation';
@@ -49,11 +50,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
           </h1>
           {postData.date && (
             <time className="text-gray-500 text-lg">
-              {new Date(postData.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {formatDateRange(postData.date, postData.dateEnd)}
             </time>
           )}
         </header>

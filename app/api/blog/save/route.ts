@@ -7,7 +7,7 @@ const postsDirectory = path.join(process.cwd(), 'content', 'blog');
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { slug, title, date, excerpt, content } = body;
+    const { slug, title, date, dateEnd, excerpt, content } = body;
 
     if (!slug || !title || !content) {
       return NextResponse.json(
@@ -22,10 +22,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Create frontmatter
-    const frontmatter = `---
+    let frontmatter = `---
 title: "${title.replace(/"/g, '\\"')}"
-date: "${date || new Date().toISOString().split('T')[0]}"
-excerpt: "${(excerpt || '').replace(/"/g, '\\"')}"
+date: "${date || new Date().toISOString().split('T')[0]}"`;
+    
+    if (dateEnd) {
+      frontmatter += `\ndateEnd: "${dateEnd}"`;
+    }
+    
+    frontmatter += `\nexcerpt: "${(excerpt || '').replace(/"/g, '\\"')}"
 ---
 
 `;

@@ -3,11 +3,13 @@
 import Link from 'next/link';
 import { useCallback, useState, type MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import { formatDateRange } from '@/lib/dateUtils';
 
 interface BlogCardProps {
   title: string;
   excerpt: string;
   date: string;
+  dateEnd?: string;
   slug: string;
   aosDelay?: number;
 }
@@ -44,15 +46,11 @@ const TrashIcon = () => (
   </svg>
 );
 
-export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: BlogCardProps) {
+export default function BlogCard({ title, excerpt, date, dateEnd, slug, aosDelay = 0 }: BlogCardProps) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const formattedDate = new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const formattedDate = formatDateRange(date, dateEnd);
 
   const handleDelete = useCallback(
     async (event: MouseEvent) => {
@@ -88,30 +86,37 @@ export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: B
       data-aos="fade-up"
       data-aos-delay={aosDelay}
     >
-      <article className="group bg-white dark:bg-slate-800 rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3),0_2px_4px_-1px_rgba(0,0,0,0.2)] transition-all duration-300 p-6 h-full border border-gray-200 dark:border-slate-700">
+      <article className="group rounded-lg transition-all duration-300 p-6 h-full
+        /* Glassmorphism Effect */
+        bg-white/5 dark:bg-black/20
+        backdrop-blur-md
+        border border-white/10 dark:border-white/18
+        shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+        hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.5)]
+        hover:border-white/25 dark:hover:border-blue-400/40">
         <div className="flex items-start gap-4 mb-4">
           {/* Icon */}
-          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center">
+          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-50/80 dark:bg-blue-900/40 backdrop-blur-sm flex items-center justify-center border border-white/20 dark:border-white/30">
             <DocumentIcon />
           </div>
           
           {/* Title and Date */}
           <div className="flex-1 flex justify-between items-start gap-4">
-            <h3 className="text-2xl md:text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100 group-hover:text-accent-blue-600 dark:group-hover:text-accent-blue-400 transition-colors duration-300">
+            <h3 className="text-2xl md:text-3xl font-bold leading-tight text-gray-900 dark:text-white group-hover:text-accent-blue-600 dark:group-hover:text-blue-300 transition-colors duration-300">
               {title}
             </h3>
             {/* Prominent Date Block */}
-            <time className="flex-shrink-0 px-4 py-1.5 bg-accent-blue text-white text-xs font-semibold rounded-full whitespace-nowrap shadow-sm">
+            <time className="flex-shrink-0 px-4 py-1.5 bg-blue-500/90 dark:bg-blue-500/80 backdrop-blur-sm text-white text-xs font-semibold rounded-full whitespace-nowrap shadow-lg border border-white/20">
               {formattedDate}
             </time>
           </div>
         </div>
         
-        <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed clamp-3">{excerpt}</p>
+        <p className="text-gray-700 dark:text-gray-200 mb-4 leading-relaxed clamp-3">{excerpt}</p>
         
         <div className="flex items-center justify-between">
           {/* Accent colored Read more link */}
-          <div className="text-accent-blue dark:text-accent-blue-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-200 font-semibold text-sm inline-flex items-center gap-1 transition-all duration-300">
+          <div className="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 font-semibold text-sm inline-flex items-center gap-1 transition-all duration-300">
             Read more <span className="transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">→</span>
           </div>
 
@@ -119,7 +124,7 @@ export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: B
             type="button"
             onClick={handleDelete}
             disabled={isDeleting}
-            className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 transition disabled:opacity-60 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full border border-red-300/50 dark:border-red-400/50 text-red-600 dark:text-red-400 bg-red-50/80 dark:bg-red-900/30 backdrop-blur-sm hover:bg-red-100/90 dark:hover:bg-red-900/50 transition disabled:opacity-60 disabled:cursor-not-allowed"
             aria-label="Delete post"
           >
             <TrashIcon />

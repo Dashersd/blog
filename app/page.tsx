@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Metadata } from 'next';
 import TypewriterText from '@/components/TypewriterText';
 import TechMarquee from '@/components/TechMarquee';
 import TeamMemberCard from '@/components/TeamMemberCard';
+import { getSortedPostsData } from '@/lib/blog';
+import { formatDateRange } from '@/lib/dateUtils';
 
 export const metadata: Metadata = {
   title: 'Dashboard - Helman Dacuma Portfolio',
@@ -44,6 +45,10 @@ export default function Home() {
     },
   ];
 
+  // Get latest 2 blog posts
+  const allPosts = getSortedPostsData();
+  const latestPosts = allPosts.slice(0, 2);
+
   return (
     <div className="bg-[#F8FAFC] dark:bg-slate-900">
       {/* Hero Section */}
@@ -56,23 +61,6 @@ export default function Home() {
           {/* Ambient Light Gradient */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-[600px] h-[600px] bg-gradient-to-tr from-blue-700/20 to-cyan-700/20 rounded-full blur-[100px]"></div>
-          </div>
-          
-          {/* Avatar */}
-          <div className="mb-8 flex justify-center relative z-10">
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden avatar-glow bg-transparent">
-              <Image
-                src="/Profile 2.png"
-                alt="Diskar-Tech Team"
-                fill
-                className="object-cover rounded-full"
-                style={{ 
-                  objectPosition: 'center 40%',
-                  transform: 'none'
-                }}
-                priority
-              />
-            </div>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 relative z-10">
@@ -123,8 +111,8 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Dashboard Cards - 3x2 Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Dashboard Cards - Team Members Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Team Member Card 1 - Hadjara */}
           <TeamMemberCard
             name="Hadjara A. Salem"
@@ -149,47 +137,120 @@ export default function Home() {
             avatar="/Profile 2.png"
           />
 
-          {/* System Documentation Card */}
-          <Link
-            href="#"
-            className="group relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-blue-200 dark:hover:border-blue-600 transition-all duration-300 ease-in-out hover:-translate-y-1 cursor-pointer"
-          >
-            <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-transform duration-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              System Documentation
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">
-              Links to SRS, ERD, and system files
-            </p>
-            <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-              View Documents <span className="ml-2">→</span>
-            </div>
-          </Link>
+          {/* Team Member Card 4 - Jonel Sei Ebol */}
+          <TeamMemberCard
+            name="Mr. Jonel Sei Ebol"
+            role="System Adviser"
+            description="Provides strategic guidance and oversight for system development"
+            avatar="/4.png"
+          />
+        </div>
 
-          {/* Group Contact/Log Card */}
-          <Link
-            href="#"
-            className="group relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-blue-200 dark:hover:border-blue-600 transition-all duration-300 ease-in-out hover:-translate-y-1 cursor-pointer"
-          >
-            <div className="h-12 w-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-transform duration-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              Group Contact & Logs
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">
-              Team communication channels: MS Teams, Discord, Trello
-            </p>
-            <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-              Connect <span className="ml-2">→</span>
-            </div>
-          </Link>
+        {/* Latest Blog Posts Section */}
+        <div className="mt-16 mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Latest Blog Posts</h2>
+          <p className="text-gray-600 dark:text-gray-400 text-lg mb-6">
+            Stay updated with my latest experiences and OJT journey at NCIP
+          </p>
+        </div>
+
+        {/* Blog Posts Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Latest Blog Posts */}
+          {latestPosts.length > 0 ? (
+            latestPosts.map((post) => {
+              const formattedDate = formatDateRange(post.date, post.dateEnd);
+              
+              return (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group relative p-6 rounded-2xl transition-all duration-300 ease-in-out hover:-translate-y-1 cursor-pointer flex flex-col
+                    /* Glassmorphism Effect */
+                    bg-white/5 dark:bg-black/20
+                    backdrop-blur-md
+                    border border-white/10 dark:border-white/18
+                    shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+                    hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.5)]
+                    hover:border-white/25 dark:hover:border-blue-400/40"
+                >
+                  <div className="h-12 w-12 bg-blue-50/80 dark:bg-blue-900/40 backdrop-blur-sm text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-transform duration-300 border border-white/20 dark:border-white/30">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-200 text-xs mb-2">
+                    {formattedDate}
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-200 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
+                    {post.excerpt || post.content.substring(0, 100) + '...'}
+                  </p>
+                  <div className="flex items-center text-blue-500 dark:text-blue-400 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
+                    Read more <span className="ml-2">→</span>
+                  </div>
+                </Link>
+              );
+            })
+          ) : (
+            <>
+              {/* Placeholder if no blog posts */}
+              <Link
+                href="/blog"
+                className="group relative p-6 rounded-2xl transition-all duration-300 ease-in-out hover:-translate-y-1 cursor-pointer
+                  /* Glassmorphism Effect */
+                  bg-white/5 dark:bg-black/20
+                  backdrop-blur-md
+                  border border-white/10 dark:border-white/18
+                  shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+                  hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.5)]
+                  hover:border-white/25 dark:hover:border-blue-400/40"
+              >
+                <div className="h-12 w-12 bg-blue-50/80 dark:bg-blue-900/40 backdrop-blur-sm text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-transform duration-300 border border-white/20 dark:border-white/30">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
+                  View Blog Posts
+                </h3>
+                <p className="text-gray-600 dark:text-gray-200 text-sm leading-relaxed mb-4">
+                  Check out my latest blog posts and OJT journey
+                </p>
+                <div className="flex items-center text-blue-500 dark:text-blue-400 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
+                  View Blog <span className="ml-2">→</span>
+                </div>
+              </Link>
+              <Link
+                href="/blog"
+                className="group relative p-6 rounded-2xl transition-all duration-300 ease-in-out hover:-translate-y-1 cursor-pointer
+                  /* Glassmorphism Effect */
+                  bg-white/5 dark:bg-black/20
+                  backdrop-blur-md
+                  border border-white/10 dark:border-white/18
+                  shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+                  hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.5)]
+                  hover:border-white/25 dark:hover:border-blue-400/40"
+              >
+                <div className="h-12 w-12 bg-blue-50/80 dark:bg-blue-900/40 backdrop-blur-sm text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-transform duration-300 border border-white/20 dark:border-white/30">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
+                  View All Posts
+                </h3>
+                <p className="text-gray-600 dark:text-gray-200 text-sm leading-relaxed mb-4">
+                  Explore all my blog posts and experiences
+                </p>
+                <div className="flex items-center text-blue-500 dark:text-blue-400 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
+                  View All <span className="ml-2">→</span>
+                </div>
+              </Link>
+            </>
+          )}
         </div>
       </section>
 

@@ -17,11 +17,13 @@ export interface BlogPost {
   slug: string;
   title: string;
   date: string;
+  dateEnd?: string;
   excerpt?: string;
   content: string;
   contentHtml?: string;
   images?: BlogImage[];
 }
+
 
 function normalizeImages(rawImages: unknown, fallbackContent: string): BlogImage[] {
   const normalized: BlogImage[] = [];
@@ -61,12 +63,12 @@ function stripImagesFromHtml(contentHtml: string): string {
   return withoutImgParagraphs.replace(/<img[^>]*>/g, '');
 }
 
-export function getSortedPostsData(): BlogPost[] {
+function getAllPostsData(): BlogPost[] {
   // Get file names under /content/blog
   const fileNames = fs.existsSync(postsDirectory)
     ? fs.readdirSync(postsDirectory)
     : [];
-  const allPostsData = fileNames
+  return fileNames
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => {
       // Remove ".md" from file name to get slug
@@ -84,19 +86,29 @@ export function getSortedPostsData(): BlogPost[] {
         slug,
         title: matterResult.data.title || '',
         date: matterResult.data.date || '',
+        dateEnd: matterResult.data.dateEnd || undefined,
         excerpt: matterResult.data.excerpt || '',
         content: matterResult.content,
         images: normalizeImages(matterResult.data.images, matterResult.content),
       };
     });
+}
 
-  // Sort posts by date
+export function getSortedPostsData(): BlogPost[] {
+  const allPostsData = getAllPostsData();
+
+  // Sort posts by date (newest first) - default sorting
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    
+    // Handle invalid dates by putting them at the end
+    if (isNaN(dateA) && isNaN(dateB)) return 0;
+    if (isNaN(dateA)) return 1;
+    if (isNaN(dateB)) return -1;
+    
+    // Sort in descending order (newest first)
+    return dateB - dateA;
   });
 }
 
@@ -135,6 +147,7 @@ export async function getPostData(slug: string): Promise<BlogPost> {
     contentHtml,
     title: matterResult.data.title || '',
     date: matterResult.data.date || '',
+    dateEnd: matterResult.data.dateEnd || undefined,
     excerpt: matterResult.data.excerpt || '',
     content: matterResult.content,
     images: normalizeImages(matterResult.data.images, matterResult.content),
