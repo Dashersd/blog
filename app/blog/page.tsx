@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/blog';
 import BlogCard from '@/components/BlogCard';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: 'Blog - Helman Dacuma',
   description: 'Blog posts including my OJT Journey at NCIP and other experiences as a BSIT student.',
