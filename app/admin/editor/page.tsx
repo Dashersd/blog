@@ -321,7 +321,7 @@ export default function BlogEditor() {
                 placeholder="2025-11-28"
               />
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                Leave empty for single date. Format: YYYY-MM-DD (e.g., 2025-11-28) - For date ranges like "November 24-28, 2025"
+                Leave empty for single date. Format: YYYY-MM-DD (e.g., 2025-11-28) - For date ranges like &quot;November 24-28, 2025&quot;
               </p>
             </div>
 
