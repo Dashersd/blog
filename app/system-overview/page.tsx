@@ -36,7 +36,7 @@ export default function SystemOverviewPage() {
               name="Harra Lou"
               role="Front-end Developer"
               description="Designs and implements user interfaces and system layouts. Focuses on creating intuitive user experiences."
-              avatar="/profile.png"
+              avatar="/Harra.png"
             />
             <TeamMemberCard
               name="Helman Dacuma"
