@@ -98,11 +98,7 @@ export default function PostCarousel({ images }: PostCarouselProps) {
                   loading={idx === 0 ? 'eager' : 'lazy'}
                 />
               </div>
-              {(img.caption || img.alt) && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-4 py-2">
-                  {img.caption || img.alt}
-                </div>
-              )}
+              {/* Caption overlay removed per request */}
             </div>
           ))}
         </div>
