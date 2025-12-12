@@ -62,7 +62,7 @@ export default function Home() {
           <div className="mb-8 flex justify-center relative z-10">
             <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden avatar-glow bg-transparent">
               <Image
-                src="/Profile_2.png"
+                src="/Profile 2.png"
                 alt="Diskar-Tech Team"
                 fill
                 className="object-cover rounded-full"
@@ -146,7 +146,7 @@ export default function Home() {
             name="Helman Dacuma"
             role="Back-end Developer"
             description="Develops system architecture and database integration"
-            avatar="/Profile_2.png"
+            avatar="/Profile 2.png"
           />
 
           {/* System Documentation Card */}
