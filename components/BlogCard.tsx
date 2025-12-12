@@ -1,8 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useState, type MouseEvent } from 'react';
-import { useRouter } from 'next/navigation';
 
 interface BlogCardProps {
   title: string;
@@ -28,41 +26,11 @@ const DocumentIcon = () => (
 );
 
 export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: BlogCardProps) {
-  const router = useRouter();
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
-
-  const handleDelete = useCallback(
-    async (event: MouseEvent) => {
-      event.preventDefault();
-      event.stopPropagation();
-      if (isDeleting) return;
-
-      const confirmed = window.confirm(`Delete "${title}"? This cannot be undone.`);
-      if (!confirmed) return;
-
-      setIsDeleting(true);
-      try {
-        const response = await fetch(`/api/blog/${slug}`, { method: 'DELETE' });
-        if (!response.ok) {
-          const data = await response.json().catch(() => ({}));
-          throw new Error(data.error || 'Failed to delete post');
-        }
-        router.refresh();
-      } catch (error) {
-        console.error(error);
-        alert('Failed to delete post. Please try again.');
-      } finally {
-        setIsDeleting(false);
-      }
-    },
-    [isDeleting, router, slug, title]
-  );
 
   return (
     <Link
@@ -92,20 +60,9 @@ export default function BlogCard({ title, excerpt, date, slug, aosDelay = 0 }: B
         
         <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed clamp-3">{excerpt}</p>
         
-        <div className="flex items-center justify-between">
-          {/* Accent colored Read more link */}
-          <div className="text-accent-blue dark:text-accent-blue-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-200 font-semibold text-sm inline-flex items-center gap-1 transition-all duration-300">
-            Read more <span className="transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">→</span>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleDelete}
-            disabled={isDeleting}
-            className="text-xs font-semibold px-3 py-1.5 rounded-full border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 transition disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {isDeleting ? 'Deleting…' : 'Delete'}
-          </button>
+        {/* Accent colored Read more link */}
+        <div className="text-accent-blue dark:text-accent-blue-300 hover:text-accent-blue-600 dark:hover:text-accent-blue-200 font-semibold text-sm inline-flex items-center gap-1 transition-all duration-300">
+          Read more <span className="transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">→</span>
         </div>
       </article>
     </Link>

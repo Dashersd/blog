@@ -56,8 +56,9 @@ function normalizeImages(rawImages: unknown, fallbackContent: string): BlogImage
 }
 
 function stripImagesFromHtml(contentHtml: string): string {
-  // Remove standalone image paragraphs to avoid duplicate rendering alongside the carousel
-  return contentHtml.replace(/<p>\s*<img[^>]*>\s*<\/p>/g, '');
+  // Remove image tags anywhere in the content to avoid duplicate rendering alongside the carousel
+  const withoutImgParagraphs = contentHtml.replace(/<p>\s*<img[^>]*>\s*<\/p>/g, '');
+  return withoutImgParagraphs.replace(/<img[^>]*>/g, '');
 }
 
 export function getSortedPostsData(): BlogPost[] {
