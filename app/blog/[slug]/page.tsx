@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllPostSlugs, getPostData } from '@/lib/blog';
+import Image from 'next/image';
+import PostCarousel from '@/components/PostCarousel';
 import { notFound } from 'next/navigation';
 
 interface BlogPostProps {
@@ -55,6 +57,29 @@ export default async function BlogPost({ params }: BlogPostProps) {
             </time>
           )}
         </header>
+
+        {/* Media */}
+        {postData.images && postData.images.length > 1 ? (
+          <div className="mb-12">
+            <PostCarousel images={postData.images} />
+          </div>
+        ) : postData.images && postData.images.length === 1 ? (
+          <div className="relative mb-12 h-[320px] md:h-[420px] overflow-hidden rounded-2xl shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]">
+            <Image
+              src={postData.images[0].src}
+              alt={postData.images[0].alt || postData.images[0].caption || postData.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 800px"
+              className="object-cover"
+              priority
+            />
+            {(postData.images[0].caption || postData.images[0].alt) && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-4 py-2">
+                {postData.images[0].caption || postData.images[0].alt}
+              </div>
+            )}
+          </div>
+        ) : null}
 
         {/* Content */}
         <div

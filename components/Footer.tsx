@@ -2,12 +2,12 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-header-navy text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Helman Dacuma</h3>
-            <p className="text-sm">
+            <p className="text-sm text-white/80">
               BSIT Student passionate about technology, creativity, and building practical digital solutions.
             </p>
           </div>
@@ -15,22 +15,22 @@ export default function Footer() {
             <h4 className="text-white text-sm font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="hover:text-primary-400 transition-colors">
+                <Link href="/about" className="text-white/80 link-wipe inline-block">
                   About Me
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-primary-400 transition-colors">
+                <Link href="/projects" className="text-white/80 link-wipe inline-block">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/research" className="hover:text-primary-400 transition-colors">
+                <Link href="/research" className="text-white/80 link-wipe inline-block">
                   Research
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-primary-400 transition-colors">
+                <Link href="/blog" className="text-white/80 link-wipe inline-block">
                   Blog
                 </Link>
               </li>
@@ -40,7 +40,7 @@ export default function Footer() {
             <h4 className="text-white text-sm font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="/contact" className="hover:text-primary-400 transition-colors">
+                <a href="/contact" className="text-white/80 link-wipe inline-block">
                   Contact Me
                 </a>
               </li>
@@ -50,7 +50,7 @@ export default function Footer() {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-blue-400 transition-colors duration-300"
+                className="text-white icon-bounce"
                 aria-label="GitHub"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-blue-400 transition-colors duration-300"
+                className="text-white icon-bounce"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+        <div className="mt-8 pt-8 border-t border-header-navy-700 text-center text-sm text-white/60">
           <p>&copy; {new Date().getFullYear()} Helman Dashelle M. Dacuma. All rights reserved.</p>
         </div>
       </div>

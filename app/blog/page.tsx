@@ -19,7 +19,7 @@ export default function BlogPage() {
             Blog
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-accent-500 to-accent-600 mx-auto mb-6"></div>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-light">
+          <p className="text-xl md:text-2xl text-gray-500 dark:text-gray-300 max-w-3xl mx-auto font-normal">
             Including my OJT Journey at NCIP and other experiences
           </p>
         </div>
@@ -27,13 +27,14 @@ export default function BlogPage() {
         {/* Blog Posts */}
         {posts.length > 0 ? (
           <div className="space-y-8">
-            {posts.map((post) => (
+            {posts.map((post, index) => (
               <BlogCard
                 key={post.slug}
                 title={post.title}
                 excerpt={post.excerpt || post.content.substring(0, 150) + '...'}
                 date={post.date}
                 slug={post.slug}
+                aosDelay={index * 150}
               />
             ))}
           </div>

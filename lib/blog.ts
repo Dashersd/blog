@@ -7,6 +7,12 @@ import remarkImages from 'remark-images';
 
 const postsDirectory = path.join(process.cwd(), 'content', 'blog');
 
+export interface BlogImage {
+  src: string;
+  alt?: string;
+  caption?: string;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -14,6 +20,39 @@ export interface BlogPost {
   excerpt?: string;
   content: string;
   contentHtml?: string;
+  images?: BlogImage[];
+}
+
+function normalizeImages(rawImages: unknown, fallbackContent: string): BlogImage[] {
+  const normalized: BlogImage[] = [];
+
+  if (Array.isArray(rawImages)) {
+    rawImages.forEach((img) => {
+      if (typeof img === 'string') {
+        normalized.push({ src: img });
+      } else if (img && typeof img === 'object' && 'src' in img) {
+        const maybe = img as { src?: string; alt?: string; caption?: string };
+        if (maybe.src) {
+          normalized.push({ src: maybe.src, alt: maybe.alt, caption: maybe.caption });
+        }
+      }
+    });
+  }
+
+  // If no explicit images, try extracting markdown image syntax ![alt](src)
+  if (!normalized.length && fallbackContent) {
+    const regex = /!\[(.*?)\]\((.*?)\)/g;
+    let match;
+    while ((match = regex.exec(fallbackContent)) !== null) {
+      const alt = match[1] || undefined;
+      const src = match[2] || '';
+      if (src) {
+        normalized.push({ src, alt });
+      }
+    }
+  }
+
+  return normalized;
 }
 
 export function getSortedPostsData(): BlogPost[] {
@@ -41,6 +80,7 @@ export function getSortedPostsData(): BlogPost[] {
         date: matterResult.data.date || '',
         excerpt: matterResult.data.excerpt || '',
         content: matterResult.content,
+        images: normalizeImages(matterResult.data.images, matterResult.content),
       };
     });
 
@@ -91,6 +131,7 @@ export async function getPostData(slug: string): Promise<BlogPost> {
     date: matterResult.data.date || '',
     excerpt: matterResult.data.excerpt || '',
     content: matterResult.content,
+    images: normalizeImages(matterResult.data.images, matterResult.content),
   };
 }
 

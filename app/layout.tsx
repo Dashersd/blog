@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AOSInit from '@/components/AOSInit';
 
 const inter = Inter({ subsets: ['latin'] });
 const spaceGrotesk = Space_Grotesk({ 
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${spaceGrotesk.variable}`}>
+        <AOSInit />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

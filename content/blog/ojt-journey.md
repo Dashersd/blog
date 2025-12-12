@@ -1,7 +1,18 @@
 ---
 title: "My OJT Journey at NCIP"
 date: "2025-12-12"
-excerpt: "A reflection on my On-the-Job Training experience at the National Commission on Indigenous Peoples, where I've been contributing to system documentation, digital processing, and office productivity improvements."
+excerpt: "A reflection on my OJT experience..."
+images:
+  - src: "/blog-images/1765508562717-WIN_20240919_22_39_07_Pro.jpg"
+    alt: "Photo 1"
+  - src: "/blog-images/1765508571637-5.PNG"
+    alt: "Screenshot 1"
+  - src: "/blog-images/1765508577545-5.PNG"
+    alt: "Screenshot 2"
+  - src: "/blog-images/1765508582760-5.PNG"
+    alt: "Screenshot 3"
+  - src: "/blog-images/1765508585386-WIN_20241116_20_18_48_Pro.jpg"
+    alt: "Photo 2"
 ---
 
 
@@ -44,10 +55,5 @@ As I continue my OJT journey, I'm excited to learn more and contribute further t
 
 ---
 
-*This blog post will be![WIN_20240919_22_39_07_Pro.jpg](/blog-images/1765508562717-WIN_20240919_22_39_07_Pro.jpg)
-![5.PNG](/blog-images/1765508571637-5.PNG)
-![5.PNG](/blog-images/1765508577545-5.PNG)
-![5.PNG](/blog-images/1765508582760-5.PNG)
-![WIN_20241116_20_18_48_Pro.jpg](/blog-images/1765508585386-WIN_20241116_20_18_48_Pro.jpg)
- updated as my OJT journey continues.*
+*This blog post will be updated as my OJT journey continues.*
 
