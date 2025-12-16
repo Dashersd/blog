@@ -379,7 +379,7 @@ export default function BlogEditor() {
                       <img
                         src={previewUrl}
                         alt="Preview"
-                        className="w-full sm:w-48 h-48 object-cover rounded-md border border-gray-300 dark:border-slate-600"
+                        className="w-full sm:w-72 max-h-64 object-contain rounded-md border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-800"
                       />
                     </div>
                     

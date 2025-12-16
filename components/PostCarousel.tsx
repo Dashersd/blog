@@ -88,17 +88,30 @@ export default function PostCarousel({ images }: PostCarouselProps) {
         <div className="flex">
           {validImages.map((img, idx) => (
             <div className="relative min-w-0 shrink-0 grow-0 basis-full" key={`${img.src}-${idx}`}>
-              <div className="relative h-[320px] md:h-[420px] w-full">
-                {/* Single responsive image that fills horizontal space without distortion */}
+              <div className="relative h-[320px] md:h-[420px] w-full overflow-hidden">
+                {/* Blurred background fill so the slide always spans full width */}
                 <Image
                   src={img.src}
-                  alt={img.alt || img.caption || `Slide ${idx + 1}`}
+                  alt=""
+                  aria-hidden="true"
                   fill
                   sizes="(max-width: 768px) 100vw, 800px"
-                  className="object-cover"
-                  style={{ objectPosition: 'center bottom' }}
-                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  className="object-cover blur-xl scale-110 opacity-70"
+                  priority={idx === 0}
                 />
+
+                {/* Foreground image: full photo, no distortion or aggressive zoom */}
+                <div className="relative z-10 flex h-full w-full items-center justify-center">
+                  <Image
+                    src={img.src}
+                    alt={img.alt || img.caption || `Slide ${idx + 1}`}
+                    width={1600}
+                    height={900}
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    className="max-h-full max-w-full object-contain"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
               </div>
               {/* Caption overlay removed per request */}
             </div>
