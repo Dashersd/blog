@@ -1,8 +1,9 @@
 ---
-title: "Picturial "
+title: "Pictorial Day"
 date: "2025-12-15"
 excerpt: "Pictorial Day"
 ---
+
 
 ![1 (2).jpeg](/blog-images/1765854011644-1__2_.jpeg)
 ![2 (2).jpeg](/blog-images/1765854005141-2__2_.jpeg) ![3.jpeg](/blog-images/1765853994213-3.jpeg)
