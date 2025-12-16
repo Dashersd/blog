@@ -89,12 +89,14 @@ export default function PostCarousel({ images }: PostCarouselProps) {
           {validImages.map((img, idx) => (
             <div className="relative min-w-0 shrink-0 grow-0 basis-full" key={`${img.src}-${idx}`}>
               <div className="relative h-[320px] md:h-[420px] w-full">
+                {/* Single responsive image that fills horizontal space without distortion */}
                 <Image
                   src={img.src}
                   alt={img.alt || img.caption || `Slide ${idx + 1}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 800px"
                   className="object-cover"
+                  style={{ objectPosition: 'center bottom' }}
                   loading={idx === 0 ? 'eager' : 'lazy'}
                 />
               </div>
