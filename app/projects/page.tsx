@@ -20,6 +20,11 @@ export default function ProjectsPage() {
       technologies: ['React', 'Tailwind CSS', 'UI/UX Design'],
       link: 'https://aurelia-sigma.vercel.app',
     },
+    {
+      title: 'Timeshift',
+      description: 'A specialized web-based watch store featuring a curated collection of timepieces with a clean, classic, and responsive interface.',
+      technologies: ['HTML', 'CSS', 'JS'],
+    },
   ];
 
   return (
