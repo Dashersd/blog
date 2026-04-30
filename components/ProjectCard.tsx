@@ -88,8 +88,14 @@ export default function ProjectCard({ title, description, technologies, link, fe
   );
 
   if (link) {
+    const isExternal = link.startsWith('http');
     return (
-      <Link href={link} className="block h-full">
+      <Link 
+        href={link} 
+        className="block h-full"
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+      >
         {content}
       </Link>
     );
