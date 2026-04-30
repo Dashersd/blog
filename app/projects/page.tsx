@@ -14,6 +14,11 @@ export default function ProjectsPage() {
       technologies: ['PHP', 'CSS', 'JS', 'Database Management', 'Real-time Visualization'],
       featured: true,
     },
+    {
+      title: 'Aurelia',
+      description: 'A modern and elegant jewelry e-commerce website designed with a focus on luxury aesthetics and user-friendly product discovery.',
+      technologies: ['React', 'Tailwind CSS', 'UI/UX Design'],
+    },
   ];
 
   return (
