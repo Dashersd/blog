@@ -24,6 +24,7 @@ export default function ProjectsPage() {
       title: 'Timeshift',
       description: 'A specialized web-based watch store featuring a curated collection of timepieces with a clean, classic, and responsive interface.',
       technologies: ['HTML', 'CSS', 'JS'],
+      link: 'https://time-shift-ivory.vercel.app/watch.html',
     },
   ];
 
