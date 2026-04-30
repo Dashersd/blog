@@ -3,8 +3,8 @@ import Link from 'next/link';
 import TeamMemberCard from '@/components/TeamMemberCard';
 
 export const metadata: Metadata = {
-  title: 'Diskar-Tech',
-  description: 'Comprehensive overview of the Diskar-Tech system development project, including status, team members, and documentation.',
+  title: 'D’Marsians',
+  description: 'Comprehensive overview of the D’Marsians: Web-Based Admission and Progress Tracking with Real-Time Visualization System.',
 };
 
 export default function SystemOverviewPage() {
@@ -14,7 +14,7 @@ export default function SystemOverviewPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Diskar-Tech
+            D’Marsians
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">

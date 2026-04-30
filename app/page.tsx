@@ -65,7 +65,7 @@ export default function Home() {
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 relative z-10">
             <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Diskar-Tech 
+              D’Marsians
             </span>
           </h1>
           
@@ -86,7 +86,7 @@ export default function Home() {
               href="/system-overview"
               className="px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             >
-              View Diskar-Tech Project
+              View D’Marsians Project
             </Link>
             <Link
               href="/cv.pdf"

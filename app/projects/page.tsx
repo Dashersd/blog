@@ -3,31 +3,16 @@ import ProjectsGrid from '@/components/ProjectsGrid';
 
 export const metadata: Metadata = {
   title: 'Projects - Helman Dacuma',
-  description: 'Featured system projects I\'ve worked on including E-Jeepney Android Capstone System, Sales CRM, UI/UX Designs, and Web Development projects.',
+  description: 'D’Marsians: Web-Based Admission and Progress Tracking with Real-Time Visualization System - A comprehensive capstone project.',
 };
 
 export default function ProjectsPage() {
   const projects = [
     {
-      title: 'E-Jeepney Android Capstone System',
-      description: 'A functional mobile prototype built to support transportation monitoring and operations. Includes UI/UX layout, app flow, and basic functionalities.',
-      technologies: ['Android', 'UI/UX Design', 'Mobile Development'],
-      featured: true, // Make this one larger
-    },
-    {
-      title: 'Sales CRM Lead Tracking Sheet',
-      description: 'A practical Excel-based CRM system designed to track leads, sales activity, and follow-ups for small businesses.',
-      technologies: ['Excel', 'CRM', 'Data Management'],
-    },
-    {
-      title: 'UI/UX Designs & Prototypes',
-      description: 'Multiple system layouts created for clients and school projects, including dashboards, login systems, and workflow screens.',
-      technologies: ['UI/UX Design', 'Prototyping', 'Figma'],
-    },
-    {
-      title: 'Web Development Projects',
-      description: 'Small-scale websites and front-end pages using HTML, CSS, and PHP.',
-      technologies: ['HTML', 'CSS', 'PHP', 'Front-end'],
+      title: 'D’Marsians: Web-Based Admission and Progress Tracking with Real-Time Visualization System',
+      description: 'A comprehensive web-based platform designed to streamline student admissions and monitor academic progress through real-time data visualization and tracking.',
+      technologies: ['PHP', 'CSS', 'JS', 'Database Management', 'Real-time Visualization'],
+      featured: true,
     },
   ];
 

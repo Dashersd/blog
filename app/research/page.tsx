@@ -3,35 +3,17 @@ import ResearchGrid from '@/components/ResearchGrid';
 
 export const metadata: Metadata = {
   title: 'Research - Helman Dacuma',
-  description: 'My academic works, case studies, and system documentation as a BSIT student.',
+  description: 'Research and documentation for D’Marsians: Web-Based Admission and Progress Tracking with Real-Time Visualization System.',
 };
 
 export default function ResearchPage() {
   const researchItems = [
     {
-      title: 'Academic Works',
-      description: 'Research papers, thesis work, and academic projects showcasing my journey as a BSIT student. Explore my contributions to the field of information technology.',
-      icon: '📖',
+      title: 'D’Marsians: Web-Based Admission and Progress Tracking with Real-Time Visualization System',
+      description: 'Comprehensive research and technical documentation for our Capstone Project. This study focuses on optimizing student admission workflows and implementing real-time data visualization for progress tracking.',
+      icon: '🚀',
       size: 'wide' as const,
       featured: true,
-    },
-    {
-      title: 'Case Studies',
-      description: 'Detailed case studies of systems and solutions I\'ve analyzed and documented. Real-world applications and problem-solving approaches.',
-      icon: '🔍',
-      size: 'medium' as const,
-    },
-    {
-      title: 'System Documentation',
-      description: 'Technical documentation for systems I\'ve worked on, including comprehensive guides and specifications from my work at NCIP.',
-      icon: '📋',
-      size: 'medium' as const,
-    },
-    {
-      title: 'Technical Reports',
-      description: 'In-depth reports and analyses of technical implementations, solutions, and system architectures. Comprehensive documentation of system designs and implementations.',
-      icon: '📊',
-      size: 'large' as const,
     },
   ];
 
@@ -45,7 +27,7 @@ export default function ResearchPage() {
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mb-6"></div>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-light">
-            My academic works, case studies, and system documentation
+            Capstone Project Research & Documentation
           </p>
         </div>
 

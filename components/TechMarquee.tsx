@@ -68,6 +68,30 @@ const technologies: TechLogo[] = [
       </svg>
     ),
   },
+  {
+    name: 'PHP',
+    svg: (
+      <svg viewBox="0 0 64 64" className="h-9 w-9" role="img" aria-label="PHP">
+        <rect width="64" height="64" rx="12" className="fill-[#777BB4]" />
+        <path
+          d="M15 25h6v14h-6V25Zm10 0h9c4 0 7 2 7 7s-3 7-7 7h-9V25Zm6 10h3c2 0 3-1 3-3s-1-3-3-3h-3v6Zm12-10h6v14h-6V25Z"
+          className="fill-white"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: 'CSS3',
+    svg: (
+      <svg viewBox="0 0 64 64" className="h-9 w-9" role="img" aria-label="CSS3">
+        <rect width="64" height="64" rx="12" className="fill-[#1572B6]" />
+        <path
+          d="M18 15h28l-2.5 25L32 45l-13.5-5L16 15h2ZM22 20l1 10h18l.5-5H27.5l-.5-5h16.5l.5-5H22Z"
+          className="fill-white"
+        />
+      </svg>
+    ),
+  },
 ];
 
 export default function TechMarquee() {
