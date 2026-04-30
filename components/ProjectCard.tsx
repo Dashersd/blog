@@ -11,7 +11,7 @@ interface ProjectCardProps {
   featured?: boolean;
 }
 
-export default function ProjectCard({ title, description, technologies, link, featured = false }: ProjectCardProps) {
+export default function ProjectCard({ title, description, technologies, link, image, featured = false }: ProjectCardProps) {
   const content = (
     <div className="project-card group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-1px_rgba(0,0,0,0.06)] hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 p-8 h-full flex flex-col overflow-hidden cursor-pointer">
       {/* Border highlight on hover */}
