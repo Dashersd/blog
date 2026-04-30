@@ -8,6 +8,7 @@ interface Project {
   description: string;
   technologies?: string[];
   link?: string;
+  image?: string;
   featured?: boolean;
 }
 
@@ -72,6 +73,7 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
             description={project.description}
             technologies={project.technologies}
             link={project.link}
+            image={project.image}
             featured={project.featured}
           />
         </div>

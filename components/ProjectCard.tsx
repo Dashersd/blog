@@ -7,6 +7,7 @@ interface ProjectCardProps {
   description: string;
   technologies?: string[];
   link?: string;
+  image?: string;
   featured?: boolean;
 }
 
@@ -17,11 +18,21 @@ export default function ProjectCard({ title, description, technologies, link, fe
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
       
       {/* Project Thumbnail/Icon Area */}
-      <div className="mb-6 h-32 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl flex items-center justify-center overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-cyan-400/10 group-hover:from-blue-400/20 group-hover:to-cyan-400/20 transition-opacity duration-300"></div>
-        <div className="relative z-10 text-5xl opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-300">
-          {featured ? '🖥️' : '💻'}
-        </div>
+      <div className="mb-6 h-48 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl flex items-center justify-center overflow-hidden relative border border-gray-100 dark:border-slate-700">
+        {image ? (
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-cyan-400/10 group-hover:from-blue-400/20 group-hover:to-cyan-400/20 transition-opacity duration-300"></div>
+            <div className="relative z-10 text-5xl opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-300">
+              {featured ? '🖥️' : '💻'}
+            </div>
+          </>
+        )}
       </div>
 
       <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 flex items-center gap-3">

@@ -19,6 +19,7 @@ export default function ProjectsPage() {
       description: 'A modern and elegant jewelry e-commerce website designed with a focus on luxury aesthetics and user-friendly product discovery.',
       technologies: ['React', 'Tailwind CSS', 'UI/UX Design'],
       link: 'https://aurelia-sigma.vercel.app',
+      image: '/projects/aurelia.png',
     },
     {
       title: 'Timeshift',
