@@ -5,6 +5,7 @@ dateEnd: "2026-03-13"
 excerpt: "WEEK 14"
 ---
 
+
 ![1772067347343-3.webp](/blog-images/1776762893390-1772067347343-3.webp)
 ![1772066616950-2.webp](/blog-images/1776762897909-1772066616950-2.webp)
 
@@ -48,3 +49,4 @@ Today, I made final adjustments to both functionality and UI. I reviewed the ent
 
 Looking back, I can see how much the system has improved from a basic setup to a more complete and interactive application. This phase made me appreciate the importance of iteration and continuous improvement.
 
+![mar12_2.jpg](/blog-images/1777624388391-mar12_2.jpg)
